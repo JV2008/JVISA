@@ -1,0 +1,101 @@
+# Fluxo do Sistema - Autenticação e Perfis
+
+## 1. Acesso inicial
+Usuário acessa o sistema:
+
+→ Tela: Login
+
+--------------------------------------
+
+## 2. Tela de Login
+Campos:
+- Email
+- Senha
+
+Ações:
+[ Entrar ]
+[ Esqueci minha senha ]
+
+--------------------------------------
+
+## 3. Tentativa de Login
+
+IF credenciais inválidas:
+    → Exibir mensagem de erro
+    → Permanecer na tela de login
+
+IF credenciais válidas:
+    → Identificar perfil do usuário no backend
+
+--------------------------------------
+
+## 4. Identificação de Perfil
+
+IF perfil == "USUARIO":
+    → Redirecionar para Dashboard do Usuário
+
+IF perfil == "ANALISTA":
+    → Redirecionar para Dashboard do Analista
+
+IF perfil == "ADMIN":
+    → (Opcional) Solicitar verificação extra (2FA)
+        IF código inválido:
+            → Bloquear acesso
+        IF código válido:
+            → Redirecionar para Dashboard Admin
+
+--------------------------------------
+
+## 5. Dashboards
+
+### 5.1 Usuário
+- Visualizar dados
+- Editar perfil
+- Ações básicas
+
+--------------------------------------
+
+### 5.2 Analista
+- Visualizar relatórios
+- Gerenciar informações
+- Acesso intermediário
+
+--------------------------------------
+
+### 5.3 Admin
+- Gerenciar usuários
+- Controle total do sistema
+- Acesso a logs
+- Configurações gerais
+
+--------------------------------------
+
+## 6. Acesso Administrativo (Oculto)
+
+O acesso administrativo NÃO é exibido na interface pública.
+
+Pode ser acessado via:
+→ URL direta (/admin)
+
+Fluxo:
+
+→ Tela de Login Admin
+    - Email
+    - Senha
+
+→ Validação:
+    IF não for admin:
+        → Acesso negado
+
+    IF for admin:
+        → (Opcional) 2FA
+        → Dashboard Admin
+
+--------------------------------------
+
+## 7. Logout
+
+Usuário clica em [ Sair ]
+
+→ Encerrar sessão
+→ Retornar para tela de Login
