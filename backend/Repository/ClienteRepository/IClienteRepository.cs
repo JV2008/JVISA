@@ -31,6 +31,7 @@ public interface IClienteRepository
     // =========================
     Task<List<tb_transacao>> GetAllByTrs_Cli_Id(int cli_id);
     Task<tb_transacao?> GetByTrs_Id_And_Cli_Id(int trs_id, int cli_id);
+    Task<tb_transacao?> GetByChavePix(string chave_pix);
     Task AddTrs(tb_transacao transacao);
     
 }

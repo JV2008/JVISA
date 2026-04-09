@@ -31,3 +31,11 @@ public enum TipoCartao
     CREDITO = 1,
     DEBITO = 2
 }
+
+public enum ChavePix {
+
+    TELEFONE = 1,
+    CPF = 2,
+    EMAIL = 3,
+    ALEATORIA = 4,
+}

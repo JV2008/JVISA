@@ -1,6 +1,7 @@
 using backend.Models;
 using backend.Repository;
 using System.Security.Claims;
+using backend.Enums;
 
 namespace backend.Services;
 
@@ -22,6 +23,22 @@ public class ClienteService
             throw new Exception("Usuário não autenticado");
 
         return int.Parse(userId);
+    }
+
+    // =========================
+    // 🔑 DEFINIR CHAVE PIX
+    // =========================
+    public async Task DefinirChavePix(ChavePix chavePix, ClaimsPrincipal user)
+    {
+        var cliente = await GetCliente(user);
+
+        if (cliente == null)
+            throw new Exception("Cliente não encontrado");
+
+        // 🔥 atualiza a chave Pix (assumindo que cli_chave_pix é um campo int)
+        cliente.cli_chave_pix = (int)chavePix;
+
+        await _repo.UpdateCliente(cliente);
     }
 
     // =========================

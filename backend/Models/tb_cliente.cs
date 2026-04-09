@@ -21,6 +21,7 @@ public class tb_cliente
     public string cli_cidade { get; set; } = string.Empty;
     public string cli_estado { get; set; } = string.Empty;
     public string cli_cep { get; set; } = string.Empty;
+    public ChavePix cli_chave_pix {get; set;}
 
 
     public DateTime cli_dataNascimento { get; set; }

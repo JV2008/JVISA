@@ -90,6 +90,12 @@ public class ClienteRepository : IClienteRepository
             .FirstOrDefaultAsync(t => t.trs_id == trs_id && t.trs_cli_id == cli_id);
     }
 
+    public async Task<tb_transacao?> GetByChavePix(string chave_pix)
+    {
+        return await _context.Transacoes
+            .FirstOrDefaultAsync(t => t.trs_cli_chave_pix == chave_pix);
+    }
+
     public async Task AddTrs(tb_transacao transacao)
     {
         await _context.Transacoes.AddAsync(transacao);
