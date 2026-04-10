@@ -31,3 +31,4 @@ public enum TipoCartao
     CREDITO = 1,
     DEBITO = 2
 }
+
