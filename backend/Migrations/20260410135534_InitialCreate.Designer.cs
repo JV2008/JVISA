@@ -12,8 +12,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260408184515_TableCliente")]
-    partial class TableCliente
+    [Migration("20260410135534_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,6 +114,9 @@ namespace backend.Migrations
                     b.Property<string>("cli_cep")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("cli_chave_pix")
+                        .HasColumnType("integer");
 
                     b.Property<string>("cli_cidade")
                         .IsRequired()
@@ -232,6 +235,17 @@ namespace backend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("trs_id"));
 
+                    b.Property<int>("ChavePixcli_id")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("descricao")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("trs_cli_chave_pix")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("trs_cli_id")
                         .HasColumnType("integer");
 
@@ -248,6 +262,8 @@ namespace backend.Migrations
                         .HasColumnType("numeric");
 
                     b.HasKey("trs_id");
+
+                    b.HasIndex("ChavePixcli_id");
 
                     b.HasIndex("trs_cnt_id");
 
@@ -392,11 +408,19 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.tb_transacao", b =>
                 {
+                    b.HasOne("backend.Models.tb_cliente", "ChavePix")
+                        .WithMany()
+                        .HasForeignKey("ChavePixcli_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("backend.Models.tb_conta", "Conta")
                         .WithMany("Transacoes")
                         .HasForeignKey("trs_cnt_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ChavePix");
 
                     b.Navigation("Conta");
                 });

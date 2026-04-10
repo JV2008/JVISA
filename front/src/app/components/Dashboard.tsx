@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { Eye, EyeOff, CreditCard, TrendingUp, TrendingDown, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { accountData, transactions } from '../data/mockData';
@@ -22,7 +22,7 @@ export function Dashboard() {
       month: 'short',
     }).format(date);
   };
-
+  const navigate = useNavigate();
   const user = getUser();
 
   return (
@@ -70,7 +70,9 @@ export function Dashboard() {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <button className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100">
+        <button onClick={() => navigate('/tranferir')}
+          className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100">
+
           <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-3">
             <TrendingUp className="text-blue-600" size={24} />
           </div>
@@ -121,11 +123,10 @@ export function Dashboard() {
             >
               <div className="flex items-center gap-4">
                 <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                    transaction.type === 'credit'
+                  className={`w-12 h-12 rounded-full flex items-center justify-center ${transaction.type === 'credit'
                       ? 'bg-green-50'
                       : 'bg-red-50'
-                  }`}
+                    }`}
                 >
                   {transaction.type === 'credit' ? (
                     <TrendingUp className="text-green-600" size={20} />
@@ -140,9 +141,8 @@ export function Dashboard() {
               </div>
               <div className="text-right">
                 <p
-                  className={`font-semibold ${
-                    transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'
-                  }`}
+                  className={`font-semibold ${transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'
+                    }`}
                 >
                   {transaction.type === 'credit' ? '+' : '-'} {formatCurrency(transaction.amount)}
                 </p>

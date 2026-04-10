@@ -39,6 +39,14 @@ public class AdminRepository : IAdminRepository
         if (usuario == null)
             throw new Exception("Usuário não encontrado");
 
+        var cliente = await _context.Clientes
+            .FirstOrDefaultAsync(c => c.cli_usu_id == id);
+
+        if (cliente != null)
+        {
+            _context.Clientes.Remove(cliente);
+        }
+
         _context.Usuarios.Remove(usuario);
         await _context.SaveChangesAsync();
     }

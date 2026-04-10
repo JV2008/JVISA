@@ -49,6 +49,9 @@ public class AppDbContext : DbContext
             .IsUnique();
 
             entity.HasKey(c => c.cli_id);
+
+            entity.Property(c => c.cli_chave_pix)
+            .HasConversion<int>();
         });
 
         // =========================

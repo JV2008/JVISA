@@ -8,6 +8,8 @@ import LoginPage from "./components/LoginPage";
 import { AnalistaPage } from "./(Pages)/Analista/page";
 import { RoleBased } from "./components/specify/ButtonAdmin";
 import RegisterPage from "./components/Register";
+import { TransferPage } from "./components/TransferPage";
+import { PixTransferForm } from "./components/Transferencia/PixTransferForm";
 
 
 export const router = createBrowserRouter([
@@ -18,7 +20,7 @@ export const router = createBrowserRouter([
 
   {
     path: "/register",
-    Component: RegisterPage, 
+    Component: RegisterPage,
   },
   {
     path: "/",
@@ -60,6 +62,20 @@ export const router = createBrowserRouter([
           <AnalistaPage />
         ),
       },
+
+      {
+        path: "tranferir",
+        element: (
+          <TransferPage />
+        ),
+      },
+      {
+
+        path: "pixtranfer",
+        element: (
+          <PixTransferForm />
+        )
+      }
     ],
   },
 ]);

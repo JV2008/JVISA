@@ -24,7 +24,7 @@ public class tb_cliente
     public ChavePix cli_chave_pix {get; set;}
 
 
-    public DateTime cli_dataNascimento { get; set; }
+    public DateOnly cli_dataNascimento { get; set; }
 
     [ForeignKey("cli_usu_id")]
     public virtual tb_usuario Usuario { get; set; } = null!;

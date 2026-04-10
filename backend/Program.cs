@@ -16,7 +16,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("MinhaPoliticaCors", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // URL do seu React/Vite
+        policy.WithOrigins(
+        "http://localhost:5173") // URL do seu React/Vite
               .AllowAnyHeader()
               .AllowAnyMethod();
     });

@@ -13,13 +13,13 @@ public class tb_transacao
 
     public string descricao { get; set; } = string.Empty;
     //Foreign Key
-    public string trs_cli_chave_pix {get; set;}
+    public string trs_cli_chave_pix {get; set;} = string.Empty;
 
-    [ForeignKey ("trs_cli_chave_pix")]
+    
+    
     public tb_cliente ChavePix {get; set;} = null!;
 
-    [ForeignKey ("trs_cnt_id")]
-    public tb_conta Conta { get; set; } = null!; 
+    public  tb_conta Conta { get; set; } = null!; 
 
     
     public ICollection<tb_alerta> Alertas { get; set; } = new List<tb_alerta>();

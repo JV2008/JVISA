@@ -1,7 +1,6 @@
 using backend.Models;
 using backend.Repository;
 using System.Security.Claims;
-using backend.Enums;
 
 namespace backend.Services;
 
@@ -36,7 +35,7 @@ public class ClienteService
             throw new Exception("Cliente não encontrado");
 
         // 🔥 atualiza a chave Pix (assumindo que cli_chave_pix é um campo int)
-        cliente.cli_chave_pix = (int)chavePix;
+        cliente.cli_chave_pix = (chavePix);
 
         await _repo.UpdateCliente(cliente);
     }

@@ -131,3 +131,4 @@ C:\Users\joaov\Desktop\JVISA\backend\obj\Debug\net10.0\refint\backend.dll
 C:\Users\joaov\Desktop\JVISA\backend\obj\Debug\net10.0\backend.pdb
 C:\Users\joaov\Desktop\JVISA\backend\obj\Debug\net10.0\backend.genruntimeconfig.cache
 C:\Users\joaov\Desktop\JVISA\backend\obj\Debug\net10.0\ref\backend.dll
+C:\Users\joaov\Desktop\JVISA\backend\obj\Debug\net10.0\backend.sourcelink.json

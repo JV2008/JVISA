@@ -37,10 +37,8 @@ namespace backend.Migrations
                     cli_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     cli_usu_id = table.Column<int>(type: "integer", nullable: false),
-                    cli_nome = table.Column<string>(type: "text", nullable: false),
                     cli_cpf = table.Column<string>(type: "text", nullable: false),
                     cli_rg = table.Column<string>(type: "text", nullable: false),
-                    cli_email = table.Column<string>(type: "text", nullable: false),
                     cli_telefone = table.Column<string>(type: "text", nullable: false),
                     cli_logradouro = table.Column<string>(type: "text", nullable: false),
                     cli_numero = table.Column<string>(type: "text", nullable: false),
@@ -49,15 +47,15 @@ namespace backend.Migrations
                     cli_cidade = table.Column<string>(type: "text", nullable: false),
                     cli_estado = table.Column<string>(type: "text", nullable: false),
                     cli_cep = table.Column<string>(type: "text", nullable: false),
-                    cli_dataNascimento = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Usuariousu_id = table.Column<int>(type: "integer", nullable: false)
+                    cli_chave_pix = table.Column<int>(type: "integer", nullable: false),
+                    cli_dataNascimento = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_cliente", x => x.cli_id);
                     table.ForeignKey(
-                        name: "FK_tb_cliente_tb_usuario_Usuariousu_id",
-                        column: x => x.Usuariousu_id,
+                        name: "FK_tb_cliente_tb_usuario_cli_usu_id",
+                        column: x => x.cli_usu_id,
                         principalTable: "tb_usuario",
                         principalColumn: "usu_id",
                         onDelete: ReferentialAction.Cascade);
@@ -179,11 +177,20 @@ namespace backend.Migrations
                     trs_cnt_id = table.Column<int>(type: "integer", nullable: false),
                     trs_tipoTransacao = table.Column<int>(type: "integer", nullable: false),
                     trs_valor = table.Column<decimal>(type: "numeric", nullable: false),
-                    trs_dataHora = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    trs_dataHora = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    descricao = table.Column<string>(type: "text", nullable: false),
+                    trs_cli_chave_pix = table.Column<string>(type: "text", nullable: false),
+                    ChavePixcli_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_transacao", x => x.trs_id);
+                    table.ForeignKey(
+                        name: "FK_tb_transacao_tb_cliente_ChavePixcli_id",
+                        column: x => x.ChavePixcli_id,
+                        principalTable: "tb_cliente",
+                        principalColumn: "cli_id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tb_transacao_tb_conta_trs_cnt_id",
                         column: x => x.trs_cnt_id,
@@ -237,9 +244,9 @@ namespace backend.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_cliente_Usuariousu_id",
+                name: "IX_tb_cliente_cli_usu_id",
                 table: "tb_cliente",
-                column: "Usuariousu_id");
+                column: "cli_usu_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_conta_cnt_cli_id",
@@ -261,6 +268,11 @@ namespace backend.Migrations
                 table: "tb_saldo",
                 column: "sld_contaId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tb_transacao_ChavePixcli_id",
+                table: "tb_transacao",
+                column: "ChavePixcli_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_transacao_trs_cnt_id",
