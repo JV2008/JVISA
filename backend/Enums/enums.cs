@@ -1,5 +1,4 @@
 
-
 public enum tipoUsuario
 {
     ADMIN = 1,
@@ -32,3 +31,10 @@ public enum TipoCartao
     DEBITO = 2
 }
 
+public enum ChavePix {
+
+    TELEFONE = 1,
+    CPF = 2,
+    EMAIL = 3,
+    ALEATORIA = 4,
+}
