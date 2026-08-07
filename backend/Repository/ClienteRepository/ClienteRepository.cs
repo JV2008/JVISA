@@ -47,6 +47,11 @@ public class ClienteRepository : IClienteRepository
         return await _context.Clientes
             .FirstOrDefaultAsync(t => t.cli_cpf == cpf);
     }
+     public async Task<tb_cliente?> GetByCli_Email(string email)
+    {
+        return await _context.Clientes
+            .FirstOrDefaultAsync(t => t.Usuario.usu_email== email);
+    }
 
 
 
@@ -100,5 +105,62 @@ public class ClienteRepository : IClienteRepository
     {
         await _context.Transacoes.AddAsync(transacao);
         await _context.SaveChangesAsync();
+    }
+
+
+
+    // =========================
+    // ➕ BUSCA POR CHAVE PIX (SUPORTA OS 3 TIPOS)
+    // =========================
+    
+    public async Task<tb_cliente?> GetByChavePixAsync(ChavePix tipo, string valor)
+    {
+        // Normaliza o valor para comparação (remove formatação)
+        var valorNormalizado = NormalizarChavePix(valor, tipo);
+
+        return tipo switch
+        {
+            ChavePix.TELEFONE => await _context.Clientes
+                .Include(c => c.Usuario)
+                .FirstOrDefaultAsync(c => c.cli_telefone == valorNormalizado),
+
+            ChavePix.CPF => await _context.Clientes
+                .Include(c => c.Usuario)
+                .FirstOrDefaultAsync(c => c.cli_cpf == valorNormalizado),
+
+            ChavePix.EMAIL => await _context.Clientes
+                .Include(c => c.Usuario)
+                .FirstOrDefaultAsync(c => c.Usuario != null && c.Usuario.usu_email == valorNormalizado),
+
+           
+
+            _ => throw new ArgumentException($"Tipo de chave PIX inválido: {tipo}")
+        };
+    }
+
+    // Método auxiliar para normalizar chaves (remove pontos, traços, etc.)
+    private string NormalizarChavePix(string valor, ChavePix tipo)
+    {
+        return tipo switch
+        {
+            ChavePix.TELEFONE => valor.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", ""),
+            ChavePix.CPF => valor.Replace(".", "").Replace("-", ""),
+            ChavePix.EMAIL => valor.Trim().ToLower(),
+            _ => valor
+        };
+    }
+
+    // ➕ Validação rápida: verifica se a chave PIX existe
+    public async Task<bool> ChavePixExisteAsync(ChavePix tipo, string valor)
+    {
+        var valorNormalizado = NormalizarChavePix(valor, tipo);
+
+        return tipo switch
+        {
+            ChavePix.TELEFONE => await _context.Clientes.AnyAsync(c => c.cli_telefone == valorNormalizado),
+            ChavePix.CPF => await _context.Clientes.AnyAsync(c => c.cli_cpf == valorNormalizado),
+            ChavePix.EMAIL => await _context.Clientes.AnyAsync(c => c.Usuario != null && c.Usuario.usu_email == valorNormalizado),
+            _ => false
+        };
     }
 }

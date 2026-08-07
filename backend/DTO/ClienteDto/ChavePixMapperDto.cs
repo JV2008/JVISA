@@ -5,6 +5,6 @@ public class ChavePixMapperDto
         { ChavePix.TELEFONE, "cli_telefone" },
         { ChavePix.CPF, "cli_cpf" },
         { ChavePix.EMAIL, "usu_email" },
-        { ChavePix.ALEATORIA, "default" }
+        { ChavePix.ALEATORIA, "token" }
     };
 }

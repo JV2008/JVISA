@@ -30,9 +30,11 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<ITransacaoRepository, TransacaoRepository>(); 
 builder.Services.AddScoped<ClienteService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<DadosContaService>();
 builder.Services.AddAuthentication(opitions =>
 {
     opitions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

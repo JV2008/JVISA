@@ -18,7 +18,7 @@ const menuItems = [
     { path: '/cartoes', label: 'Cartões', icon: CreditCard },
     { path: '/configuracoes', label: 'Configurações', icon: Settings },
 
-    { path: '/admin', label: 'Painel Admin', icon: Shield }
+   
 
 ];
 

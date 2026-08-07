@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router';
 import { Home, FileText, CreditCard, Settings, LogOut, User, Menu, X, icons, Shield } from 'lucide-react';
 import { useState } from 'react';
-import logoImg from '../assets/logo.png'; // Ajuste o caminho relativo se necessário
+import logoImg from '../assets/logo.png'; 
 import { getUser } from '../../../utils/auth';
 
 
@@ -15,8 +15,8 @@ interface menuItems {
 const menuItems = [
     { path: '/', label: 'Dashboard', icon: Home },
     { path: '/extrato', label: 'Extrato', icon: FileText },
-    { path: '/cartoes', label: 'Cartões', icon: CreditCard },
     { path: '/configuracoes', label: 'Configurações', icon: Settings },
+    { path: '/painel', label: 'Painel Analista', icon: Shield },
 
   
 

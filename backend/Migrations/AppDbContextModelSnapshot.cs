@@ -127,8 +127,8 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("cli_dataNascimento")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("cli_dataNascimento")
+                        .HasColumnType("date");
 
                     b.Property<string>("cli_estado")
                         .IsRequired()

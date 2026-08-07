@@ -10,6 +10,9 @@ import { RoleBased } from "./components/specify/ButtonAdmin";
 import RegisterPage from "./components/Register";
 import { TransferPage } from "./components/TransferPage";
 import { PixTransferForm } from "./components/Transferencia/PixTransferForm";
+import { PixTransferConfirmation } from "./components/Transferencia/PixTransferConfirmation";
+import Clicadastro from "./components/CliCadastro";
+import { PainelPage } from "./components/PainelAnalist";
 
 
 export const router = createBrowserRouter([
@@ -47,6 +50,11 @@ export const router = createBrowserRouter([
         ),
       },
 
+      { path: "painel",
+         element: (
+          <PainelPage />
+        ) },
+
       // 🔥 ROTA EXCLUSIVA ADMIN
       {
         path: "admin",
@@ -62,6 +70,12 @@ export const router = createBrowserRouter([
           <AnalistaPage />
         ),
       },
+      {
+        path: "clicadastro",
+        element: (
+          <Clicadastro />
+        ),
+      },
 
       {
         path: "tranferir",
@@ -71,9 +85,16 @@ export const router = createBrowserRouter([
       },
       {
 
-        path: "pixtranfer",
+        path: "pix",
         element: (
           <PixTransferForm />
+        )
+      },
+      {
+
+        path: "confirmacao",
+        element: (
+          <PixTransferConfirmation />
         )
       }
     ],

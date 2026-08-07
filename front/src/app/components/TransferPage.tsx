@@ -62,7 +62,7 @@ export function TransferPage() {
 
           return (
             <button
-              onClick={() => navigate('/pixtranfer')}
+              onClick={() => navigate('/pix')}
               className={`bg-gradient-to-br ${method.color} hover:${method.hoverColor} text-white rounded-2xl p-8 transition shadow-lg hover:shadow-xl transform hover:scale-105 ${
                 isSelected ? 'scale-105 ring-4 ring-white ring-opacity-50' : ''
               }`}

@@ -10,7 +10,8 @@ public interface IClienteRepository
     Task Add(tb_cliente cliente);
     Task<tb_cliente?> GetByCli_Usu_Id(int usu_id);
     Task<tb_cliente?> GetByCli_Id(int cli_usu_id);
-    Task<tb_cliente?> GetByCPF (string cli_cpf);
+    Task<tb_cliente?> GetByCli_Email(string usu_email);
+    Task<tb_cliente?> GetByCPF(string cli_cpf);
 
 
     Task UpdateCliente(tb_cliente cliente);
@@ -33,5 +34,9 @@ public interface IClienteRepository
     Task<tb_transacao?> GetByTrs_Id_And_Cli_Id(int trs_id, int cli_id);
     Task<tb_transacao?> GetByChavePix(string chave_pix);
     Task AddTrs(tb_transacao transacao);
-    
+
+
+     // ➕ Busca por chave PIX (qualquer tipo)
+    Task<tb_cliente?> GetByChavePixAsync(ChavePix tipo, string valor);
+    Task<bool> ChavePixExisteAsync(ChavePix tipo, string valor);
 }

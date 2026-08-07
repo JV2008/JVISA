@@ -112,6 +112,7 @@ public class ClienteService
         saldo.sld_saldo -= transacao.trs_valor;
 
         transacao.trs_cli_id = cliente.cli_id;
+        transacao.trs_cnt_id = saldo.sld_contaId;  
         transacao.trs_dataHora = DateTime.UtcNow;
 
         await _repo.UpdateSld(saldo);

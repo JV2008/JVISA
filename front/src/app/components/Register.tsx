@@ -58,10 +58,24 @@ export default function RegisterPage() {
     <div className="size-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="w-full max-w-md mx-auto p-8">
         <div className="bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-center mb-8">Bem-vindo</h1>
+          <h1 className="text-center mb-8">Cadastre-se</h1>
           <p className="text-center text-gray-600 mb-6">Entre na sua conta bancária</p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label htmlFor="nome" className="block text-sm font-medium text-gray-700 mb-2">
+                Nome
+              </label>
+              <input
+                id="nome"
+                type="text"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                placeholder="Digite seu Nome"
+                required
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              />
+            </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email
@@ -109,6 +123,7 @@ export default function RegisterPage() {
             </div>
 
             <button
+              onClick={() => navigate ('/clicadastro')}
               type="submit"
               className="w-full bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition font-medium"
             >

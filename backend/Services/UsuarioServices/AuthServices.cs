@@ -89,9 +89,10 @@ public class AuthService
             new Claim("nome", usuario.usu_nome),
         };
 
-        var key = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes("chave-de-acesso-para-o-sistemabanco-jvisa-teste-de-validacao-do-token-jwt")
-        );
+        var jwtKey = _config["Jwt:Key"]
+            ?? throw new InvalidOperationException("Configuração 'Jwt:Key' não encontrada.");
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
 
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
